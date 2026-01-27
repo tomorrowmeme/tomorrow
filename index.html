@@ -1,1 +1,157 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOMORROW — No es hoy. Siempre es mañana.</title>
+  <meta name="description" content="Tomorrow: la meme coin para los que siempre dicen 'mañana empiezo'. No es hoy. Siempre es mañana." />
+  <style>
+    :root{
+      --bg1:#fff7ed;
+      --bg2:#fffbeb;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#fde68a;
+      --accent:#f97316;
+      --shadow: 0 18px 50px rgba(15,23,42,.10);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(800px 400px at 50% -10%, rgba(249,115,22,.20), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 60px}
+    .card{
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(253,230,138,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* Language switcher */
+    .lang{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .lang a{
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(253,230,138,.95);
+      color:#7c2d12;
+    }
+    .lang a.active{
+      background: rgba(249,115,22,.18);
+      border-color: rgba(249,115,22,.35);
+    }
+
+    .hero{
+      padding: 28px 18px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero h1{
+      margin: 10px 0 6px;
+      font-size: clamp(42px, 7vw, 74px);
+      letter-spacing: 1px;
+      color:#ea580c;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .sub{color:var(--muted); margin:0 auto; max-width:720px}
+    .tagline{
+      margin: 12px 0 0;
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 900;
+      color: var(--accent);
+      font-style: italic;
+    }
+    .hero-img{
+      max-width: 240px;
+      width: 100%;
+      height: auto;
+      display:block;
+      margin: 6px auto 10px;
+      border-radius: 18px;
+      box-shadow: 0 14px 40px rgba(15,23,42,.12);
+    }
+    .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius: 999px;
+      border:1px solid rgba(0,0,0,.06);
+      font-weight:900;
+      min-width: 210px;
+      box-shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+    .btn.primary{
+      background: linear-gradient(90deg, #fb923c, #f97316);
+      color:white;
+      border-color: rgba(249,115,22,.35);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.8);
+      border:1px dashed rgba(245,158,11,.65);
+      color:#9a3412;
+    }
+
+    .section{margin-top:18px; padding:18px}
+    h2{margin:0; font-size:24px}
+    p{margin:10px 0 0; color:var(--muted); line-height:1.5}
+    footer{margin-top:22px; text-align:center; color:#7c2d12; opacity:.9}
+    .fineprint{margin-top:8px; font-size:13px; color:#6b7280}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="lang">
+      <a href="index.html" class="active">ES</a>
+      <a href="en.html">EN</a>
+      <a href="pt.html">PT</a>
+      <a href="fr.html">FR</a>
+    </div>
+
+    <div class="hero card">
+      <img src="tmr.jpeg" alt="Tomorrow meme" class="hero-img">
+      <h1>TOMORROW</h1>
+      <p class="sub">La meme coin para los que siempre dicen: <strong>“Mañana empiezo”</strong></p>
+      <div class="tagline">No es hoy. Siempre es mañana.</div>
+
+      <div class="btns">
+        <a class="btn primary" href="#preventa" onclick="return false;">Comprar mañana →</a>
+        <a class="btn ghost" href="#whitepaper" onclick="return false;">Leer whitepaper (mañana)</a>
+      </div>
+    </div>
+
+    <div class="section card" id="preventa">
+      <h2>Preventa</h2>
+      <p><strong>Comienza:</strong> Algún día · <strong>Precio:</strong> Sorpresa (para mañana)</p>
+      <p>Este proyecto es 100% meme. Sin prisa. Solo vibes de internet y humor cripto.</p>
+    </div>
+
+    <footer>
+      <div style="font-weight:900; font-size:18px; color:#9a3412">TOMORROW</div>
+      <div class="fineprint">
+        © 2026 Tomorrow Meme. Todos los derechos reservados… para mañana.<br/>
+        100% meme. No es consejo financiero. ☕🌙
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
