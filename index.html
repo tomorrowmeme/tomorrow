@@ -1,346 +1,476 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOMORROW — No es hoy. Siempre es mañana.</title>
+  <meta name="description" content="Tomorrow: la meme coin para los que siempre dicen 'mañana empiezo'. No es hoy. Siempre es mañana." />
 
-export default function App() {
-  const [language, setLanguage] = useState("es");
-
-  const translations = {
-    es: {
-      heroTitle: "TOMORROW",
-      heroSubtitle: "La meme coin para los que siempre dicen: 'Mañana empiezo'",
-      tagline: "No es hoy. Siempre es mañana.",
-      buyButton: "Comprar mañana →",
-      whitepaperButton: "Leer whitepaper (mañana)",
-      countdown: "El contador empezará... mañana",
-      aboutTitle: "¿Qué es Tomorrow?",
-      aboutText: "Tomorrow es la meme coin que celebra el arte de la procrastinación. Inspirada en ese amigo que siempre dice 'mañana empiezo', llevamos la filosofía del 'mañana eterno' al mundo crypto.",
-      aboutMotto: "Sin presión. Sin prisa. Solo vibes de internet y humor crypto.",
-      tokenomicsTitle: "Tokenomics (para mañana)",
-      roadmapTitle: "Roadmap (cuando podamos)",
-      communityTitle: "Únete a la comunidad",
-      communityText: "Donde todos dejan todo para mañana... juntos",
-      footerText: "© 2026 Tomorrow Coin. Todos los derechos reservados... para mañana.",
-      footerDisclaimer: "Este proyecto es 100% meme. No es inversión financiera. Compra solo si crees en el poder del 'mañana'.",
-      slogan: "No promises. No rush. Just Tomorrow.",
-      languageSwitch: "ES | EN",
-      tokenImageAlt: "Moneda cripto Tomorrow con personajes meme"
-    },
-    en: {
-      heroTitle: "TOMORROW",
-      heroSubtitle: "The meme coin for those who always say: 'I'll start tomorrow'",
-      tagline: "Not today. Always tomorrow.",
-      buyButton: "Buy tomorrow →",
-      whitepaperButton: "Read whitepaper (tomorrow)",
-      countdown: "The countdown will start... tomorrow",
-      aboutTitle: "What is Tomorrow?",
-      aboutText: "Tomorrow is the meme coin that celebrates the art of procrastination. Inspired by that friend who always says 'I'll start tomorrow', we bring the 'eternal tomorrow' philosophy to the crypto world.",
-      aboutMotto: "No pressure. No rush. Just internet vibes and crypto humor.",
-      tokenomicsTitle: "Tokenomics (for tomorrow)",
-      roadmapTitle: "Roadmap (when we can)",
-      communityTitle: "Join the community",
-      communityText: "Where everyone leaves everything for tomorrow... together",
-      footerText: "© 2026 Tomorrow Coin. All rights reserved... for tomorrow.",
-      footerDisclaimer: "This project is 100% meme. Not a financial investment. Buy only if you believe in the power of 'tomorrow'.",
-      slogan: "No promises. No rush. Just Tomorrow.",
-      languageSwitch: "ES | EN",
-      tokenImageAlt: "Tomorrow crypto coin with meme characters"
+  <style>
+    :root{
+      --bg1:#fff7ed;   /* orange-50 */
+      --bg2:#fffbeb;   /* amber-50  */
+      --text:#0f172a;
+      --muted:#475569;
+      --card:#ffffffcc;
+      --border:#fde68a; /* amber-200 */
+      --accent:#f97316; /* orange-500 */
+      --accent2:#f59e0b;/* amber-500 */
+      --shadow: 0 18px 50px rgba(15,23,42,.10);
+      --radius: 18px;
     }
-  };
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      color:var(--text);
+      background:
+        radial-gradient(800px 400px at 50% -10%, rgba(249,115,22,.20), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1000px; margin:0 auto; padding:28px 18px 60px}
 
-  const t = translations[language];
+    /* Language switcher */
+    .lang{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin: 0 0 10px;
+      flex-wrap:wrap;
+    }
+    .lang a{
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(253,230,138,.95);
+      color:#7c2d12;
+    }
+    .lang a:hover{ filter:brightness(1.03); }
+    .lang a.active{
+      background: rgba(249,115,22,.18);
+      border-color: rgba(249,115,22,.35);
+    }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 font-sans text-gray-800">
-      {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50">
-        <button 
-          onClick={() => setLanguage(language === "es" ? "en" : "es")}
-          className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200 hover:bg-amber-50 transition-colors"
-        >
-          {t.languageSwitch}
-        </button>
+    .hero{
+      margin-top: 8px;
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(253,230,138,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 18px;
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-60px -60px auto -60px;
+      height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(245,158,11,.25), transparent 60%),
+                  radial-gradient(circle at 70% 30%, rgba(249,115,22,.22), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(-6deg);
+    }
+    .hero-inner{position:relative; z-index:1}
+    .hero-img{
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      display:block;
+      margin: 6px auto 10px;
+      border-radius: 18px;
+      box-shadow: 0 14px 40px rgba(15,23,42,.12);
+    }
+    h1{
+      margin: 10px 0 0;
+      font-size: clamp(42px, 7vw, 74px);
+      letter-spacing: 1px;
+      color:#ea580c; /* orange-600 */
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .sub{
+      margin: 10px auto 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+    .tagline{
+      margin: 14px 0 0;
+      font-size: clamp(20px, 3.2vw, 30px);
+      font-weight: 900;
+      color: var(--accent);
+      font-style: italic;
+    }
+    .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius: 999px;
+      border:1px solid rgba(0,0,0,.06);
+      font-weight:900;
+      transition:.15s transform ease, .15s filter ease;
+      min-width: 210px;
+      box-shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.02)}
+    .btn.primary{
+      background: linear-gradient(90deg, #fb923c, #f97316);
+      color:white;
+      border-color: rgba(249,115,22,.35);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.8);
+      border:1px dashed rgba(245,158,11,.65);
+      color:#9a3412;
+    }
+
+    .section{margin-top:18px}
+    .card{
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(253,230,138,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .grid{display:grid; gap:14px}
+    @media (min-width: 860px){
+      .grid.two{grid-template-columns: 1.2fr .8fr}
+      .grid.three{grid-template-columns: repeat(3, 1fr)}
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:900; color:#b45309;
+      margin:0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+    .kicker span{
+      display:inline-flex; width:30px; height:30px; border-radius: 10px;
+      align-items:center; justify-content:center;
+      background: rgba(245,158,11,.20);
+      border:1px solid rgba(245,158,11,.35);
+    }
+    h2{margin:0; font-size: 26px}
+    p{margin:10px 0 0; color: var(--muted); line-height:1.5}
+
+    .mini{
+      margin-top:12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
+      padding:12px 14px;
+      background: rgba(255,255,255,.75);
+      border-radius: 14px;
+      border:1px dashed rgba(245,158,11,.55);
+      color:#9a3412;
+      font-weight:900;
+    }
+    .timer{
+      font-variant-numeric: tabular-nums;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color:#7c2d12;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(253,230,138,.95);
+      font-weight:900;
+      color:#7c2d12;
+    }
+
+    .list{margin:12px 0 0; padding-left: 18px; color: var(--muted)}
+    .list li{margin:6px 0}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px}
+    .badge{
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(253,230,138,.95);
+      font-weight:900;
+      color:#7c2d12;
+    }
+
+    .token-card{
+      padding:18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(253,230,138,.9);
+      box-shadow: 0 12px 35px rgba(15,23,42,.08);
+    }
+    .token-title{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .token-title strong{font-size:18px}
+    .token-value{
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(245,158,11,.18);
+      border:1px solid rgba(245,158,11,.35);
+      font-weight:900;
+      color:#92400e;
+      white-space:nowrap;
+    }
+    .token-desc{margin-top:8px; color: var(--muted)}
+
+    .road{display:grid; gap:12px; margin-top:14px}
+    .step{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:12px; flex-wrap:wrap;
+      padding:14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(253,230,138,.9);
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+    }
+    .step .left{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .phase{
+      width:40px; height:40px;
+      border-radius: 14px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(249,115,22,.14);
+      border:1px solid rgba(249,115,22,.22);
+      font-weight:900; color:#9a3412;
+    }
+    .step h3{margin:0; font-size:18px}
+    .status{
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.80);
+      border:1px dashed rgba(245,158,11,.6);
+      font-weight:900;
+      color:#7c2d12;
+    }
+
+    .socials{display:grid; gap:12px; margin-top:14px}
+    @media (min-width: 760px){ .socials{grid-template-columns: repeat(3,1fr)} }
+    .social{
+      padding:18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(253,230,138,.9);
+      box-shadow: 0 12px 35px rgba(15,23,42,.08);
+    }
+    .social .icon{font-size:24px}
+    .social strong{display:block; margin-top:10px}
+    .social p{margin-top:8px}
+    .link{
+      display:inline-flex; margin-top:12px;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(251,146,60,.25), rgba(245,158,11,.22));
+      border:1px solid rgba(245,158,11,.35);
+      font-weight:900;
+      color:#7c2d12;
+    }
+
+    footer{margin-top:20px; text-align:center; color:#7c2d12; opacity:.9}
+    .fineprint{max-width:900px; margin: 10px auto 0; font-size: 13px; color:#6b7280}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="lang">
+      <a href="index.html" class="active" title="Español">ES</a>
+      <a href="en.html" title="English">EN</a>
+      <a href="pt.html" title="Português">PT</a>
+      <a href="fr.html" title="Français">FR</a>
+    </div>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <img src="tmr.jpeg" alt="Tomorrow meme" class="hero-img">
+        <h1>TOMORROW</h1>
+        <div class="sub">La meme coin para los que siempre dicen: <strong>“Mañana empiezo”</strong></div>
+        <div class="tagline">No es hoy. Siempre es mañana.</div>
+
+        <div class="btns">
+          <a class="btn primary" href="#preventa" onclick="return false;">Comprar mañana →</a>
+          <a class="btn ghost" href="#whitepaper" onclick="return false;">Leer whitepaper (mañana)</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card" id="preventa">
+      <div class="grid two">
+        <div>
+          <div class="kicker"><span>⏰</span> Preventa</div>
+          <h2>Comienza: Algún día</h2>
+          <p>Precio: <strong>Sorpresa (para mañana)</strong></p>
+
+          <div class="mini">
+            <div class="pill">⏳ Contador oficial</div>
+            <div class="timer" id="countdown">00:00:00</div>
+          </div>
+          <p style="margin-top:10px;color:#6b7280">El contador empezará… <strong>mañana</strong>.</p>
+        </div>
+
+        <div>
+          <div class="kicker"><span>🫠</span> Aviso importante</div>
+          <h2>Hoy no.</h2>
+          <p>Este proyecto es 100% meme. Sin prisa. Solo vibes de internet y humor cripto.</p>
+          <ul class="list">
+            <li>Sin promesas</li>
+            <li>Sin prisa</li>
+            <li>Solo mañana</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card" id="about">
+      <div class="kicker"><span>🧠</span> ¿Qué es Tomorrow?</div>
+      <h2>El arte de procrastinar… tokenizado</h2>
+      <p>
+        Tomorrow es la meme coin que celebra el arte de la procrastinación. Inspirada en ese amigo que siempre dice
+        <strong>“mañana empiezo”</strong>, llevamos la filosofía del <em>“mañana eterna”</em> al mundo cripto.
+      </p>
+      <div class="badges">
+        <div class="badge">😌 Sin presión</div>
+        <div class="badge">😂 Humor cripto</div>
+        <div class="badge">🌙 Solo mañana</div>
+      </div>
+      <p style="margin-top:12px;color:#6b7280"><strong>Lema oficial:</strong> “Hoy no es el día. Mañana será mejor”.</p>
+    </div>
+
+    <div class="section card" id="tokenomics">
+      <div class="kicker"><span>🪙</span> Tokenomics (para mañana)</div>
+      <h2>Transparencia… mañana</h2>
+      <p>Datos totalmente serios, confirmados por el comité de “lo hago mañana”.</p>
+
+      <div class="grid three" style="margin-top:14px">
+        <div class="token-card">
+          <div class="token-title">
+            <strong>Total Supply</strong>
+            <span class="token-value">1,000,000,000,000</span>
+          </div>
+          <div class="token-desc">TOMORROW coins (para repartir… mañana)</div>
+        </div>
+
+        <div class="token-card">
+          <div class="token-title">
+            <strong>Impuestos</strong>
+            <span class="token-value">0%</span>
+          </div>
+          <div class="token-desc">0% compra / 0% venta (hoy no, mañana tampoco)</div>
+        </div>
+
+        <div class="token-card">
+          <div class="token-title">
+            <strong>Liquidez</strong>
+            <span class="token-value">🔒</span>
+          </div>
+          <div class="token-desc">Bloqueada… para mañana</div>
+        </div>
       </div>
 
-      {/* Hero Section */}
-      <header className="py-20 px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between"
-        >
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600 mb-6">
-              {t.heroTitle}
-            </h1>
-            <p className="text-2xl md:text-3xl font-medium text-amber-800 mb-8 max-w-3xl mx-auto">
-              {t.heroSubtitle}
-            </p>
-            <p className="text-4xl font-bold text-orange-600 mb-12 italic">
-              {t.tagline}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <motion.button
-                whileHover={{ x: 10 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-lg transition-all duration-300"
-              >
-                {t.buyButton}
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-amber-200 hover:bg-amber-300 text-amber-800 font-bold py-4 px-8 rounded-xl text-lg border-2 border-dashed border-amber-500 transition-all duration-300"
-              >
-                {t.whitepaperButton}
-              </motion.button>
-            </div>
-          </div>
-          
-          <div className="md:w-1/2 flex justify-center">
-            <div className="bg-gradient-to-br from-amber-100 to-orange-50 p-4 rounded-3xl shadow-2xl border-4 border-dashed border-amber-300">
-              <img 
-                src="https://placehold.co/600x600/FFD700/000000?text=Tomorrow+Coin&font=roboto" 
-                alt={t.tokenImageAlt}
-                className="w-80 h-80 rounded-full object-cover"
-              />
-            </div>
-          </div>
-        </motion.div>
-        
-        <div className="mt-16">
-          <div className="inline-block bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-amber-200">
-            <p className="text-2xl font-bold text-amber-700">⏰ Preventa</p>
-            <p className="text-xl mt-2">Comienza: Algún día</p>
-            <p className="text-xl">Precio: Sorpresa (para mañana)</p>
-            <div className="mt-4 flex justify-center">
-              <div className="bg-amber-100 text-amber-800 font-mono py-2 px-6 rounded-lg text-3xl border-2 border-dashed border-amber-300">
-                00:00:00
-              </div>
-            </div>
-            <p className="mt-2 text-amber-600 italic">{t.countdown}</p>
-          </div>
-        </div>
-      </header>
-
-      {/* About Section */}
-      <section className="py-16 px-4 bg-white/50">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-amber-800 mb-12"
-          >
-            {t.aboutTitle}
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-amber-100 to-orange-50 p-8 rounded-2xl shadow-md border border-amber-200"
-            >
-              <p className="text-xl leading-relaxed mb-6">
-                {t.aboutText}
-              </p>
-              <p className="text-xl leading-relaxed font-medium text-amber-700">
-                {t.aboutMotto}
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex justify-center"
-            >
-              <div className="bg-gradient-to-br from-orange-200 to-amber-300 rounded-3xl p-6 shadow-xl max-w-md w-full">
-                <div className="bg-white rounded-2xl p-8 text-center border-4 border-dashed border-amber-400">
-                  <div className="text-8xl mb-4">😴</div>
-                  <p className="text-2xl font-bold text-amber-800 mb-2">"Hoy no"</p>
-                  <p className="text-xl text-orange-600">- El lema oficial de Tomorrow -</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tokenomics Section */}
-      <section className="py-16 px-4 bg-gradient-to-br from-orange-50 to-amber-100">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-orange-600 mb-12"
-          >
-            {t.tokenomicsTitle}
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Total Supply", value: "1,000,000,000,000", desc: "TOMORROW coins (para repartir... mañana)" },
-              { title: "Impuestos", value: "0% / 0%", desc: "0% compra / 0% venta (hoy no, mañana tampoco)" },
-              { title: "Liquidez", value: "🔒", desc: "Bloqueada... eventualmente" }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-amber-200 hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="text-4xl font-bold text-orange-500 mb-2">{item.value}</div>
-                <h3 className="text-2xl font-bold text-amber-700 mb-3">{item.title}</h3>
-                <p className="text-lg text-gray-600">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-16 max-w-3xl mx-auto bg-amber-50 rounded-xl p-8 border border-dashed border-amber-300"
-          >
-            <p className="text-2xl font-bold text-center text-amber-800">
-              "El contrato será auditado... mañana"
-            </p>
-            <p className="text-xl text-center mt-4 text-orange-600 italic">
-              {t.slogan}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Roadmap Section */}
-      <section className="py-16 px-4 bg-white/70">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-amber-800 mb-12"
-          >
-            {t.roadmapTitle}
-          </motion.h2>
-          
-          <div className="space-y-8">
-            {[
-              { phase: "Fase 0", title: "Tener la idea", status: "✅ Casi hecho" },
-              { phase: "Fase 1", title: "Crear sitio web", status: "⏳ En progreso (casi)" },
-              { phase: "Fase 2", title: "Lanzar preventa", status: "📅 Mañana (tal vez)" },
-              { phase: "Fase 3", title: "Llegar a la luna", status: "🚀 Algún día... quizás" }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200 flex flex-col md:flex-row justify-between items-center"
-              >
-                <div>
-                  <div className="text-xl font-bold text-orange-600">{item.phase}</div>
-                  <div className="text-2xl font-bold text-amber-800 mt-1">{item.title}</div>
-                </div>
-                <div className="mt-4 md:mt-0 bg-white px-6 py-3 rounded-full font-bold text-lg border-2 border-dashed border-amber-400">
-                  {item.status}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="py-16 px-4 bg-gradient-to-br from-amber-100 to-orange-200">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
-            style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}
-          >
-            {t.communityTitle}
-          </motion.h2>
-          <p className="text-2xl text-amber-100 mb-12 max-w-2xl mx-auto" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>
-            {t.communityText}
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { name: "Telegram", icon: "💬", desc: "Canal activo (mañana)" },
-              { name: "Twitter", icon: "🐦", desc: "Tweets para otro día" },
-              { name: "Discord", icon: "🎮", desc: "Servidor en construcción" }
-            ].map((social, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 w-64 shadow-lg border border-amber-300"
-              >
-                <div className="text-5xl mb-4">{social.icon}</div>
-                <h3 className="text-2xl font-bold text-amber-800 mb-2">{social.name}</h3>
-                <p className="text-lg text-orange-600 mb-4">{social.desc}</p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-orange-400 to-amber-500 text-white font-bold py-3 px-6 rounded-xl w-full hover:from-orange-500 hover:to-amber-600 transition-all duration-300"
-                >
-                  Unirse mañana
-                </motion.button>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-16 bg-white/80 rounded-2xl p-8 max-w-3xl mx-auto border-2 border-dashed border-amber-400"
-          >
-            <p className="text-2xl font-bold text-center text-amber-800">
-              "Hoy no es el día. Mañana será mejor."
-            </p>
-            <p className="text-xl text-center mt-4 text-orange-600 italic">
-              - Equipo de desarrollo de Tomorrow (durmiendo actualmente) 😴
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-4 bg-gradient-to-r from-amber-800 to-orange-900 text-center text-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-5xl font-bold mb-6">TOMORROW</div>
-          <p className="text-2xl font-medium mb-8 max-w-3xl mx-auto">
-            {t.slogan}
-          </p>
-          <p className="text-lg opacity-80 mb-4">
-            {t.footerText}
-          </p>
-          <p className="text-lg opacity-80 italic">
-            {t.footerDisclaimer}
-          </p>
-          
-          <div className="mt-12 flex justify-center gap-8">
-            <div className="text-4xl">🌙</div>
-            <div className="text-4xl">☕</div>
-            <div className="text-4xl">🛋️</div>
-            <div className="text-4xl">😴</div>
-          </div>
-          
-          <p className="mt-8 text-xl font-bold">
-            {t.tagline}
-          </p>
-        </div>
-      </footer>
+      <p style="margin-top:14px;color:#6b7280"><strong>Auditoría del contrato:</strong> mañana.</p>
     </div>
-  );
-}
+
+    <div class="section card" id="roadmap">
+      <div class="kicker"><span>🗺️</span> Hoja de ruta</div>
+      <h2>Ruta hacia mañana</h2>
+      <p>Plan estratégico del equipo de Tomorrow (durmiendo actualmente) 😴</p>
+
+      <div class="road">
+        <div class="step">
+          <div class="left">
+            <div class="phase">0</div>
+            <div>
+              <h3>Fase 0 — Tener la idea</h3>
+              <div style="color:#6b7280;margin-top:2px">“Casi hecho”</div>
+            </div>
+          </div>
+          <div class="status">✅ Quizás</div>
+        </div>
+
+        <div class="step">
+          <div class="left">
+            <div class="phase">1</div>
+            <div>
+              <h3>Fase 1 — Crear sitio web</h3>
+              <div style="color:#6b7280;margin-top:2px">En progreso (casi)</div>
+            </div>
+          </div>
+          <div class="status">🛠️ En progreso</div>
+        </div>
+
+        <div class="step">
+          <div class="left">
+            <div class="phase">2</div>
+            <div>
+              <h3>Fase 2 — Lanzar preventa</h3>
+              <div style="color:#6b7280;margin-top:2px">Mañana (tal vez)</div>
+            </div>
+          </div>
+          <div class="status">⏳ Mañana</div>
+        </div>
+
+        <div class="step">
+          <div class="left">
+            <div class="phase">3</div>
+            <div>
+              <h3>Fase 3 — Llegar a la luna</h3>
+              <div style="color:#6b7280;margin-top:2px">Algún día… quizás</div>
+            </div>
+          </div>
+          <div class="status">🚀 Algún día</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card" id="community">
+      <div class="kicker"><span>🤝</span> Comunidad</div>
+      <h2>Donde todos dejan todo para mañana… juntos</h2>
+      <p>Únete a la comunidad (mañana). O hoy. Pero mañana suena mejor.</p>
+
+      <div class="socials">
+        <div class="social">
+          <div class="icon">💬</div>
+          <strong>Telegram</strong>
+          <p>Canal activo… mañana.</p>
+          <a class="link" href="#" onclick="return false;">Unirse mañana</a>
+        </div>
+
+        <div class="social">
+          <div class="icon">🐦</div>
+          <strong>X (Twitter)</strong>
+          <p>Tweets para otro día.</p>
+          <a class="link" href="#" onclick="return false;">Seguir mañana</a>
+        </div>
+
+        <div class="social">
+          <div class="icon">🧩</div>
+          <strong>Discord</strong>
+          <p>Servidor en construcción.</p>
+          <a class="link" href="#" onclick="return false;">Entrar mañana</a>
+        </div>
+      </div>
+
+      <p style="margin-top:14px;color:#6b7280"><strong>Frase oficial:</strong> “Hoy no. Siempre mañana.”</p>
+    </div>
+
+    <footer class="section">
+      <div style="font-weight:900; font-size:18px; color:#9a3412">TOMORROW</div>
+      <div class="fineprint">
+        © 2026 Tomorrow Meme. Todos los derechos reservados… para mañana.<br/>
+        Este proyecto es 100% meme. No es inversión financiera. ☕🌙
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Countdown: siempre 00:00:00 (porque empieza mañana)
+    const el = document.getElementById("countdown");
+    function tick(){ if(el) el.textContent = "00:00:00"; }
+    setInterval(tick, 1000);
+    tick();
+  </script>
+</body>
+</html>
