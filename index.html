@@ -245,6 +245,27 @@
       opacity:.9;
     }
     .fineprint{max-width:900px; margin: 10px auto 0; font-size: 13px; color:#6b7280}
+    /* Language switcher */
+.lang{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-bottom:10px;
+}
+.lang a{
+  font-weight:900;
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(253,230,138,.95);
+  color:#7c2d12;
+  text-decoration:none;
+}
+.lang a:hover{ filter:brightness(1.03); }
+.lang a.active{
+  background: rgba(249,115,22,.18);
+  border-color: rgba(249,115,22,.35);
+}
   </style>
 </head>
 <body>
