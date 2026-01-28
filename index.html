@@ -1,475 +1,487 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TOMORROW — No es hoy. Siempre es mañana.</title>
-  <meta name="description" content="Tomorrow: la meme coin para los que siempre dicen 'mañana empiezo'. No es hoy. Siempre es mañana." />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrow (TMR) - El amigo de los memes</title>
   <style>
-    :root{
-      --bg1:#fff7ed;   /* orange-50 */
-      --bg2:#fffbeb;   /* amber-50  */
-      --text:#0f172a;
-      --muted:#475569;
-      --card:#ffffffcc;
-      --border:#fde68a; /* amber-200 */
-      --accent:#f97316; /* orange-500 */
-      --accent2:#f59e0b;/* amber-500 */
-      --shadow: 0 18px 50px rgba(15,23,42,.10);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
-      color:var(--text);
-      background:
-        radial-gradient(800px 400px at 50% -10%, rgba(249,115,22,.20), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      min-height:100vh;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1000px; margin:0 auto; padding:28px 18px 60px}
-
-    /* Language switcher */
-    .lang{
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
-      margin: 0 0 10px;
-      flex-wrap:wrap;
-    }
-    .lang a{
-      font-weight:900;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(253,230,138,.95);
-      color:#7c2d12;
-    }
-    .lang a:hover{ filter:brightness(1.03); }
-    .lang a.active{
-      background: rgba(249,115,22,.18);
-      border-color: rgba(249,115,22,.35);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .hero{
-      margin-top: 8px;
-      background: rgba(255,255,255,.65);
-      border:1px solid rgba(253,230,138,.9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 18px;
-      position:relative;
-      overflow:hidden;
-      text-align:center;
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-60px -60px auto -60px;
-      height:220px;
-      background: radial-gradient(circle at 30% 30%, rgba(245,158,11,.25), transparent 60%),
-                  radial-gradient(circle at 70% 30%, rgba(249,115,22,.22), transparent 60%);
-      filter: blur(10px);
-      transform: rotate(-6deg);
-    }
-    .hero-inner{position:relative; z-index:1}
-    .hero-img{
-      max-width: 260px;
+
+    .container {
+      max-width: 800px;
       width: 100%;
-      height: auto;
-      display:block;
-      margin: 6px auto 10px;
-      border-radius: 18px;
-      box-shadow: 0 14px 40px rgba(15,23,42,.12);
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
-    h1{
-      margin: 10px 0 0;
-      font-size: clamp(42px, 7vw, 74px);
-      letter-spacing: 1px;
-      color:#ea580c; /* orange-600 */
-      font-weight: 900;
-      text-transform: uppercase;
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      padding: 30px;
+      text-align: center;
+      color: white;
     }
-    .sub{
-      margin: 10px auto 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.35;
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
-    .tagline{
-      margin: 14px 0 0;
-      font-size: clamp(20px, 3.2vw, 30px);
-      font-weight: 900;
-      color: var(--accent);
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Chatbot */
+    .chatbot {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pig-container {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pig-img {
+      width: 180px;
+      height: 180px;
+      animation: breathe 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .pig-img:hover {
+      transform: scale(1.05);
+    }
+
+    .pig-img:active {
+      transform: scale(0.95);
+    }
+
+    /* Animaciones */
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes speak {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes think {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Chat interface */
+    .chat-box {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 20px;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 80%;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.bot {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user {
+      background: #e9ecef;
+      color: #333;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 15px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .input-area input:focus {
+      border-color: #667eea;
+    }
+
+    .input-area button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .input-area button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .input-area button:active {
+      transform: translateY(0);
+    }
+
+    /* Loading indicator */
+    .thinking {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      color: #667eea;
       font-style: italic;
     }
-    .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 16px;
-      border-radius: 999px;
-      border:1px solid rgba(0,0,0,.06);
-      font-weight:900;
-      transition:.15s transform ease, .15s filter ease;
-      min-width: 210px;
-      box-shadow: 0 10px 25px rgba(2,6,23,.08);
-    }
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.02)}
-    .btn.primary{
-      background: linear-gradient(90deg, #fb923c, #f97316);
-      color:white;
-      border-color: rgba(249,115,22,.35);
-    }
-    .btn.ghost{
-      background: rgba(255,255,255,.8);
-      border:1px dashed rgba(245,158,11,.65);
-      color:#9a3412;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #667eea;
+      border-radius: 50%;
+      animation: bounce 1.4s ease-in-out infinite both;
     }
 
-    .section{margin-top:18px}
-    .card{
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(253,230,138,.9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .grid{display:grid; gap:14px}
-    @media (min-width: 860px){
-      .grid.two{grid-template-columns: 1.2fr .8fr}
-      .grid.three{grid-template-columns: repeat(3, 1fr)}
-    }
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      font-weight:900; color:#b45309;
-      margin:0 0 8px;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-    .kicker span{
-      display:inline-flex; width:30px; height:30px; border-radius: 10px;
-      align-items:center; justify-content:center;
-      background: rgba(245,158,11,.20);
-      border:1px solid rgba(245,158,11,.35);
-    }
-    h2{margin:0; font-size: 26px}
-    p{margin:10px 0 0; color: var(--muted); line-height:1.5}
-
-    .mini{
-      margin-top:12px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap;
-      padding:12px 14px;
-      background: rgba(255,255,255,.75);
-      border-radius: 14px;
-      border:1px dashed rgba(245,158,11,.55);
-      color:#9a3412;
-      font-weight:900;
-    }
-    .timer{
-      font-variant-numeric: tabular-nums;
-      font-size: 22px;
-      letter-spacing: 2px;
-      color:#7c2d12;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.85);
-      border:1px solid rgba(253,230,138,.95);
-      font-weight:900;
-      color:#7c2d12;
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
     }
 
-    .list{margin:12px 0 0; padding-left: 18px; color: var(--muted)}
-    .list li{margin:6px 0}
-    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px}
-    .badge{
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      border:1px solid rgba(253,230,138,.95);
-      font-weight:900;
-      color:#7c2d12;
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
     }
 
-    .token-card{
-      padding:18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(253,230,138,.9);
-      box-shadow: 0 12px 35px rgba(15,23,42,.08);
-    }
-    .token-title{display:flex; justify-content:space-between; align-items:center; gap:10px}
-    .token-title strong{font-size:18px}
-    .token-value{
-      padding:8px 10px;
-      border-radius: 999px;
-      background: rgba(245,158,11,.18);
-      border:1px solid rgba(245,158,11,.35);
-      font-weight:900;
-      color:#92400e;
-      white-space:nowrap;
-    }
-    .token-desc{margin-top:8px; color: var(--muted)}
-
-    .road{display:grid; gap:12px; margin-top:14px}
-    .step{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:12px; flex-wrap:wrap;
-      padding:14px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(253,230,138,.9);
-      box-shadow: 0 10px 26px rgba(15,23,42,.06);
-    }
-    .step .left{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .phase{
-      width:40px; height:40px;
-      border-radius: 14px;
-      display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(249,115,22,.14);
-      border:1px solid rgba(249,115,22,.22);
-      font-weight:900; color:#9a3412;
-    }
-    .step h3{margin:0; font-size:18px}
-    .status{
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.80);
-      border:1px dashed rgba(245,158,11,.6);
-      font-weight:900;
-      color:#7c2d12;
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
     }
 
-    .socials{display:grid; gap:12px; margin-top:14px}
-    @media (min-width: 760px){ .socials{grid-template-columns: repeat(3,1fr)} }
-    .social{
-      padding:18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(253,230,138,.9);
-      box-shadow: 0 12px 35px rgba(15,23,42,.08);
-    }
-    .social .icon{font-size:24px}
-    .social strong{display:block; margin-top:10px}
-    .social p{margin-top:8px}
-    .link{
-      display:inline-flex; margin-top:12px;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(251,146,60,.25), rgba(245,158,11,.22));
-      border:1px solid rgba(245,158,11,.35);
-      font-weight:900;
-      color:#7c2d12;
-    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
 
-    footer{margin-top:20px; text-align:center; color:#7c2d12; opacity:.9}
-    .fineprint{max-width:900px; margin: 10px auto 0; font-size: 13px; color:#6b7280}
+      .pig-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .chat-box {
+        min-height: 250px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-
-    <div class="lang">
-      <a href="index.html" class="active" title="Español">ES</a>
-      <a href="en.html" title="English">EN</a>
-      <a href="pt.html" title="Português">PT</a>
-      <a href="fr.html" title="Français">FR</a>
+  <div class="container">
+    <div class="header">
+      <h1>🐷 Tomorrow (TMR)</h1>
+      <p>El amigo de los memes</p>
     </div>
 
-    <div class="hero">
-      <div class="hero-inner">
-        <img src="tmr.jpeg" alt="Tomorrow meme" class="hero-img">
-        <h1>TOMORROW</h1>
-        <div class="sub">La meme coin para los que siempre dicen: <strong>“Mañana empiezo”</strong></div>
-        <div class="tagline">No es hoy. Siempre es mañana.</div>
-
-        <div class="btns">
-          <a class="btn primary" href="#preventa" onclick="return false;">Comprar mañana →</a>
-          <a class="btn ghost" href="#whitepaper" onclick="return false;">Leer whitepaper (mañana)</a>
-        </div>
+    <div class="chatbot">
+      <div class="pig-container">
+        <img 
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTAwIiByeD0iNzUiIHJ5PSI3MCIgZmlsbD0iI2ZmYjZjMSIgc3Ryb2tlPSIjZmY2OWI0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZWxsaXBzZSBjeD0iNzAiIGN5PSI4MCIgcj0iMTUiIGZpbGw9IiNmZmYiLz4KICA8ZWxsaXBzZSBjeD0iMTMwIiBjeT0iODAiIHI9IjE1IiBmaWxsPSIjZmZmIi8+CiAgPGNpcmNsZSBjeD0iNjUiIGN5PSI3NSIgcj0iNSIgZmlsbD0iIzMzMyIvPgogIDxjaXJjbGUgY3g9IjEzNSIgY3k9Ijc1IiByPSI1IiBmaWxsPSIjMzMzIi8+CiAgPHBhdGggZD0iTTEwMCwxMjAgQzg1LDEzNSAxMTUsMTM1IDEwMCwxMjAgWiIgZmlsbD0iI2ZmOTljMCIvPgogIDxwYXRoIGQ9Ik04NSwxMzUgQzg1LDE0MCA5MCwxNDUgOTUsMTQwIEMxMDAsMTQ1IDEwNSwxNDAgMTA1LDEzNSBaIiBmaWxsPSIjZmY2OWI0Ii8+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSI4MCIgcj0iMiIgZmlsbD0iIzMzMyIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjgwIiByPSIyIiBmaWxsPSIjMzMzIi8+CiAgPHBhdGggZD0iTTEwMCwxNTAgQzkwLDE2MCAxMTAsMTYwIDEwMCwxNTAgWiIgZmlsbD0iI2ZmNjliNCIvPgogIDxwYXRoIGQ9Ik00MCwxMDAgQzMwLDkwIDMwLDExMCA0MCwxMDAgWiIgZmlsbD0iI2ZmYjZjMSIgc3Ryb2tlPSIjZmY2OWI0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTYwLDEwMCBDMTcwLDkwIDE3MCwxMTAgMTYwLDEwMCBaIiBmaWxsPSIjZmZiNmMxIiBzdHJva2U9IiNmZjY5YjQiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNmZjY5YjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5PUEU8L3RleHQ+Cjwvc3ZnPg=="
+          class="pig-img" 
+          id="pig" 
+          alt="Cerdito Tomorrow"
+        />
       </div>
-    </div>
 
-    <div class="section card" id="preventa">
-      <div class="grid two">
-        <div>
-          <div class="kicker"><span>⏰</span> Preventa</div>
-          <h2>Comienza: Algún día</h2>
-          <p>Precio: <strong>Sorpresa (para mañana)</strong></p>
-
-          <div class="mini">
-            <div class="pill">⏳ Contador oficial</div>
-            <div class="timer" id="countdown">00:00:00</div>
-          </div>
-          <p style="margin-top:10px;color:#6b7280">El contador empezará… <strong>mañana</strong>.</p>
-        </div>
-
-        <div>
-          <div class="kicker"><span>🫠</span> Aviso importante</div>
-          <h2>Hoy no.</h2>
-          <p>Este proyecto es 100% meme. Sin prisa. Solo vibes de internet y humor cripto.</p>
-          <ul class="list">
-            <li>Sin promesas</li>
-            <li>Sin prisa</li>
-            <li>Solo mañana</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="section card" id="about">
-      <div class="kicker"><span>🧠</span> ¿Qué es Tomorrow?</div>
-      <h2>El arte de procrastinar… tokenizado</h2>
-      <p>
-        Tomorrow es la meme coin que celebra el arte de la procrastinación. Inspirada en ese amigo que siempre dice
-        <strong>“mañana empiezo”</strong>, llevamos la filosofía del <em>“mañana eterna”</em> al mundo cripto.
-      </p>
-      <div class="badges">
-        <div class="badge">😌 Sin presión</div>
-        <div class="badge">😂 Humor cripto</div>
-        <div class="badge">🌙 Solo mañana</div>
-      </div>
-      <p style="margin-top:12px;color:#6b7280"><strong>Lema oficial:</strong> “Hoy no es el día. Mañana será mejor”.</p>
-    </div>
-
-    <div class="section card" id="tokenomics">
-      <div class="kicker"><span>🪙</span> Tokenomics (para mañana)</div>
-      <h2>Transparencia… mañana</h2>
-      <p>Datos totalmente serios, confirmados por el comité de “lo hago mañana”.</p>
-
-      <div class="grid three" style="margin-top:14px">
-        <div class="token-card">
-          <div class="token-title">
-            <strong>Total Supply</strong>
-            <span class="token-value">1,000,000,000,000</span>
-          </div>
-          <div class="token-desc">TOMORROW coins (para repartir… mañana)</div>
-        </div>
-
-        <div class="token-card">
-          <div class="token-title">
-            <strong>Impuestos</strong>
-            <span class="token-value">0%</span>
-          </div>
-          <div class="token-desc">Los impuestos se definirán antes del lanzamiento oficial</div>
-
-        <div class="token-card">
-          <div class="token-title">
-            <strong>Liquidez</strong>
-            <span class="token-value">🔒</span>
-          </div>
-          <div class="token-desc">Bloqueada… para mañana</div>
+      <div class="chat-box" id="chatBox">
+        <div class="message bot">
+          ¡Hola! 👋 Soy Tomorrow, el cerdito de las memecoins.
+          <br><br>
+          Pregúntame lo que quieras sobre el proyecto... o no.
+          <br><br>
+          <em>Hoy no. Siempre mañana. 💤</em>
         </div>
       </div>
 
-      <p style="margin-top:14px;color:#6b7280"><strong>Auditoría del contrato:</strong> mañana.</p>
-    </div>
-
-    <div class="section card" id="roadmap">
-      <div class="kicker"><span>🗺️</span> Hoja de ruta</div>
-      <h2>Ruta hacia mañana</h2>
-      <p>Plan estratégico del equipo de Tomorrow (durmiendo actualmente) 😴</p>
-
-      <div class="road">
-        <div class="step">
-          <div class="left">
-            <div class="phase">0</div>
-            <div>
-              <h3>Fase 0 — Tener la idea</h3>
-              <div style="color:#6b7280;margin-top:2px">“Casi hecho”</div>
-            </div>
-          </div>
-          <div class="status">✅ Quizás</div>
-        </div>
-
-        <div class="step">
-          <div class="left">
-            <div class="phase">1</div>
-            <div>
-              <h3>Fase 1 — Crear sitio web</h3>
-              <div style="color:#6b7280;margin-top:2px">En progreso (casi)</div>
-            </div>
-          </div>
-          <div class="status">🛠️ En progreso</div>
-        </div>
-
-        <div class="step">
-          <div class="left">
-            <div class="phase">2</div>
-            <div>
-              <h3>Fase 2 — Lanzar preventa</h3>
-              <div style="color:#6b7280;margin-top:2px">Mañana (tal vez)</div>
-            </div>
-          </div>
-          <div class="status">⏳ Mañana</div>
-        </div>
-
-        <div class="step">
-          <div class="left">
-            <div class="phase">3</div>
-            <div>
-              <h3>Fase 3 — Llegar a la luna</h3>
-              <div style="color:#6b7280;margin-top:2px">Algún día… quizás</div>
-            </div>
-          </div>
-          <div class="status">🚀 Algún día</div>
-        </div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
+        <button onclick="sendMessage()">Enviar</button>
       </div>
     </div>
-
-    <div class="section card" id="community">
-      <div class="kicker"><span>🤝</span> Comunidad</div>
-      <h2>Donde todos dejan todo para mañana… juntos</h2>
-      <p>Únete a la comunidad (mañana). O hoy. Pero mañana suena mejor.</p>
-
-      <div class="socials">
-        <div class="social">
-          <div class="icon">💬</div>
-          <strong>Telegram</strong>
-          <p>Canal activo… mañana.</p>
-          <a class="link" href="#" onclick="return false;">Unirse mañana</a>
-        </div>
-
-        <div class="social">
-          <div class="icon">🐦</div>
-          <strong>X (Twitter)</strong>
-          <p>Tweets para otro día.</p>
-          <a class="link" href="#" onclick="return false;">Seguir mañana</a>
-        </div>
-
-        <div class="social">
-          <div class="icon">🧩</div>
-          <strong>Discord</strong>
-          <p>Servidor en construcción.</p>
-          <a class="link" href="#" onclick="return false;">Entrar mañana</a>
-        </div>
-      </div>
-
-      <p style="margin-top:14px;color:#6b7280"><strong>Frase oficial:</strong> “Hoy no. Siempre mañana.”</p>
-    </div>
-
-    <footer class="section">
-      <div style="font-weight:900; font-size:18px; color:#9a3412">TOMORROW</div>
-      <div class="fineprint">
-        © 2026 Tomorrow Meme. Todos los derechos reservados… para mañana.<br/>
-        Este proyecto es 100% meme. No es inversión financiera. ☕🌙
-      </div>
-    </footer>
-
   </div>
 
   <script>
-    // Countdown: siempre 00:00:00 (porque empieza mañana)
-    const el = document.getElementById("countdown");
-    function tick(){ if(el) el.textContent = "00:00:00"; }
-    setInterval(tick, 1000);
-    tick();
+    // Base de conocimiento del whitepaper (respuestas predefinidas)
+    const knowledgeBase = {
+      es: {
+        "qué es tomorrow": "Tomorrow (TMR) es una memecoin social construida sobre Solana, enfocada en comunidad, memes y entretenimiento. No es un producto financiero tradicional, es humor, cultura digital y comunidad. 🐷",
+        "qué es tmr": "TMR es el símbolo de Tomorrow, una memecoin que representa la frase universal: 'Mañana lo hago'. Es el amigo de los memes: el que siempre llega tarde, el que compra mañana, el que se ríe cuando ya es tarde. 😌",
+        "supply": "El supply total de TMR es de 1.000.000.000 tokens. Es fijo y no se crearán tokens adicionales. 📊",
+        "tokenomics": "La distribución es: 40% Preventa, 35% Liquidez, 25% Equipo + Marketing. El equipo usa su parte para memes, publicidad, comunidad y gastos operativos. 💰",
+        "liquidez": "La liquidez se creará en un DEX de Solana después de la preventa. Será bloqueada para aportar estabilidad y transparencia. 🔒",
+        "impuestos": "Los impuestos (compra/venta) están por definir. Cualquier impuesto se comunicará antes del lanzamiento oficial. Tomorrow no promete '0% para siempre', promete decir la verdad. 🧾",
+        "preventa": "La preventa está por definir (fecha y precio). Será a través de una plataforma externa en Solana. El precio será inferior al inicial tras el lanzamiento. Sin countdowns, sin gritos. 📅",
+        "roadmap": "FASE 0 ✅ HECHO - El token ya existe. FASE 1 🟡 EN PROCESO - Web, comunidad, memes. FASE 2 ⏳ MAÑANA - Preventa. FASE 3 🌅 MAÑANA - Liquidez + Lanzamiento. FASE 4 ♾️ SIEMPRE MAÑANA - Crecimiento orgánico. 🗺️",
+        "estado": "✅ Token creado en Solana | ❌ Liquidez: 0 | ❌ Precio: sin definir | 🟡 Comunidad: abierta y creciendo. El token existe técnicamente, pero no hay mercado todavía. 📊",
+        "chatbot": "¡Hola! Soy el chatbot de Tomorrow. Estoy aquí para responder preguntas con humor y tono meme. No soy asistente financiero ni herramienta de inversión. Solo un cerdito que procrastina. 🐷",
+        "filosofía": "Tomorrow se basa en tres principios: 🤝 Ser el amigo de los memes, 😌 Reducir la presión y el FOMO, 🕰 Aceptar que el 'mañana' puede llegar tarde... o no llegar. En un entorno que invita a correr, Tomorrow invita a esperar y reír. 🐷💤",
+        "auditoría": "El contrato SPL será auditado antes del lanzamiento oficial. La auditoría se centrará en la seguridad del contrato. Este whitepaper no es una auditoría técnica, es una explicación transparente. 🔍",
+        "fomopromo": "Mañana lo hago. Mañana lo compro. Mañana lo vendo. Mañana lo pienso. Mañana... 😴",
+        "hoy no": "Hoy no. Siempre mañana. 🐷💤",
+        "default": "Eso lo pienso... ¡mañana! 🤔💤\n\nPero si quieres, puedes preguntarme sobre: qué es Tomorrow, supply, tokenomics, liquidez, preventa, roadmap, estado actual..."
+      },
+      en: {
+        "what is tomorrow": "Tomorrow (TMR) is a memecoin social built on Solana, focused on community, memes and entertainment. It's not a traditional financial product, it's humor, digital culture and community. 🐷",
+        "what is tmr": "TMR is the symbol of Tomorrow, a memecoin that represents the universal phrase: 'I'll do it tomorrow'. It's the friend of memes: the one who's always late, the one who buys tomorrow, the one who laughs when it's too late. 😌",
+        "supply": "The total supply of TMR is 1,000,000,000 tokens. It's fixed and no additional tokens will be created. 📊",
+        "tokenomics": "Distribution: 40% Presale, 35% Liquidity, 25% Team + Marketing. The team uses their part for memes, advertising, community and operational expenses. 💰",
+        "liquidity": "Liquidity will be created on a Solana DEX after the presale. It will be locked to provide stability and transparency. 🔒",
+        "taxes": "Taxes (buy/sell) are to be defined. Any tax will be communicated before the official launch. Tomorrow doesn't promise '0% forever', it promises to tell the truth. 🧾",
+        "presale": "The presale is to be defined (date and price). It will be through an external platform on Solana. The price will be lower than the initial price after launch. No countdowns, no shouting. 📅",
+        "roadmap": "PHASE 0 ✅ DONE - Token already exists. PHASE 1 🟡 IN PROGRESS - Web, community, memes. PHASE 2 ⏳ TOMORROW - Presale. PHASE 3 🌅 TOMORROW - Liquidity + Launch. PHASE 4 ♾️ ALWAYS TOMORROW - Organic growth. 🗺️",
+        "status": "✅ Token created on Solana | ❌ Liquidity: 0 | ❌ Price: undefined | 🟡 Community: open and growing. The token exists technically, but there's no market yet. 📊",
+        "chatbot": "Hi! I'm Tomorrow's chatbot. I'm here to answer questions with humor and meme tone. I'm not a financial assistant or investment tool. Just a pig that procrastinates. 🐷",
+        "philosophy": "Tomorrow is based on three principles: 🤝 Be the friend of memes, 😌 Reduce pressure and FOMO, 🕰 Accept that 'tomorrow' may be late... or not come at all. In an environment that invites running, Tomorrow invites waiting and laughing. 🐷💤",
+        "audit": "The SPL contract will be audited before the official launch. The audit will focus on contract security. This whitepaper is not a technical audit, it's a transparent explanation. 🔍",
+        "fomopromo": "I'll do it tomorrow. I'll buy tomorrow. I'll sell tomorrow. I'll think about it tomorrow. Tomorrow... 😴",
+        "today no": "Today no. Always tomorrow. 🐷💤",
+        "default": "I'll think about that... tomorrow! 🤔💤\n\nBut if you want, you can ask me about: what is Tomorrow, supply, tokenomics, liquidity, presale, roadmap, current status..."
+      },
+      fr: {
+        "qu'est ce que tomorrow": "Tomorrow (TMR) est une memecoin sociale construite sur Solana, axée sur la communauté, les memes et le divertissement. Ce n'est pas un produit financier traditionnel, c'est de l'humour, de la culture numérique et de la communauté. 🐷",
+        "qu'est ce que tmr": "TMR est le symbole de Tomorrow, une memecoin qui représente la phrase universelle : 'Je le ferai demain'. C'est l'ami des memes : celui qui est toujours en retard, celui qui achète demain, celui qui rit quand il est trop tard. 😌",
+        "supply": "L'offre totale de TMR est de 1 000 000 000 de tokens. Elle est fixe et aucun token supplémentaire ne sera créé. 📊",
+        "tokenomics": "Répartition : 40% Prévente, 35% Liquidité, 25% Équipe + Marketing. L'équipe utilise sa part pour les memes, la publicité, la communauté et les dépenses opérationnelles. 💰",
+        "liquidité": "La liquidité sera créée sur un DEX Solana après la prévente. Elle sera bloquée pour apporter stabilité et transparence. 🔒",
+        "impôts": "Les taxes (achat/vente) sont à définir. Toute taxe sera communiquée avant le lancement officiel. Tomorrow ne promet pas '0% pour toujours', il promet de dire la vérité. 🧾",
+        "prévente": "La prévente est à définir (date et prix). Elle se fera via une plateforme externe sur Solana. Le prix sera inférieur au prix initial après le lancement. Pas de compte à rebours, pas de cris. 📅",
+        "feuille de route": "PHASE 0 ✅ FAIT - Le token existe déjà. PHASE 1 🟡 EN COURS - Web, communauté, memes. PHASE 2 ⏳ DEMAIN - Prévente. PHASE 3 🌅 DEMAIN - Liquidité + Lancement. PHASE 4 ♾️ TOUJOURS DEMAIN - Croissance organique. 🗺️",
+        "statut": "✅ Token créé sur Solana | ❌ Liquidité : 0 | ❌ Prix : non défini | 🟡 Communauté : ouverte et en croissance. Le token existe techniquement, mais il n'y a pas encore de marché. 📊",
+        "chatbot": "Salut ! Je suis le chatbot de Tomorrow. Je suis là pour répondre aux questions avec humour et ton meme. Je ne suis pas un assistant financier ni un outil d'investissement. Juste un cochon qui procrastine. 🐷",
+        "philosophie": "Tomorrow repose sur trois principes : 🤝 Être l'ami des memes, 😌 Réduire la pression et le FOMO, 🕰 Accepter que 'demain' puisse être en retard... ou ne jamais arriver. Dans un environnement qui invite à courir, Tomorrow invite à attendre et à rire. 🐷💤",
+        "audit": "Le contrat SPL sera audité avant le lancement officiel. L'audit se concentrera sur la sécurité du contrat. Ce whitepaper n'est pas un audit technique, c'est une explication transparente. 🔍",
+        "fomopromo": "Je le ferai demain. J'achèterai demain. Je vendrai demain. J'y réfléchirai demain. Demain... 😴",
+        "aujourd'hui non": "Aujourd'hui non. Toujours demain. 🐷💤",
+        "default": "J'y réfléchirai... demain ! 🤔💤\n\nMais si tu veux, tu peux me demander : qu'est-ce que Tomorrow, supply, tokenomics, liquidité, prévente, feuille de route, statut actuel..."
+      },
+      it: {
+        "cos'è tomorrow": "Tomorrow (TMR) è una memecoin sociale costruita su Solana, focalizzata su comunità, meme e intrattenimento. Non è un prodotto finanziario tradizionale, è umorismo, cultura digitale e comunità. 🐷",
+        "cos'è tmr": "TMR è il simbolo di Tomorrow, una memecoin che rappresenta la frase universale: 'Lo faccio domani'. È l'amico dei meme: quello che arriva sempre in ritardo, quello che compra domani, quello che ride quando è troppo tardi. 😌",
+        "supply": "La supply totale di TMR è di 1.000.000.000 token. È fissa e non saranno creati token aggiuntivi. 📊",
+        "default": "Ci penso... domani! 🤔💤"
+      }
+    };
+
+    // Detección simple de idioma (basada en palabras clave)
+    function detectLanguage(text) {
+      const lower = text.toLowerCase();
+      
+      // Español
+      const spanishWords = ['qué', 'es', 'supply', 'liquidez', 'preventa', 'roadmap', 'estado', 'hoy no', 'siempre mañana', 'mañana', 'token', 'memecoin'];
+      // Inglés
+      const englishWords = ['what', 'is', 'supply', 'liquidity', 'presale', 'roadmap', 'status', 'today no', 'always tomorrow', 'tomorrow', 'token', 'memecoin'];
+      // Francés
+      const frenchWords = ['qu\'est', 'quoi', 'supply', 'liquidité', 'prévente', 'feuille de route', 'statut', 'aujourd\'hui non', 'toujours demain', 'demain', 'token', 'memecoin'];
+      // Italiano
+      const italianWords = ['cos\'è', 'che', 'supply', 'liquidità', 'prevendita', 'roadmap', 'stato', 'oggi no', 'sempre domani', 'domani', 'token', 'memecoin'];
+      
+      let esCount = 0, enCount = 0, frCount = 0, itCount = 0;
+      
+      spanishWords.forEach(word => {
+        if (lower.includes(word)) esCount++;
+      });
+      
+      englishWords.forEach(word => {
+        if (lower.includes(word)) enCount++;
+      });
+      
+      frenchWords.forEach(word => {
+        if (lower.includes(word)) frCount++;
+      });
+      
+      italianWords.forEach(word => {
+        if (lower.includes(word)) itCount++;
+      });
+      
+      // Determinar el idioma con más coincidencias
+      const max = Math.max(esCount, enCount, frCount, itCount);
+      
+      if (max === 0) return 'es'; // Por defecto español
+      if (esCount === max) return 'es';
+      if (enCount === max) return 'en';
+      if (frCount === max) return 'fr';
+      if (itCount === max) return 'it';
+      
+      return 'es';
+    }
+
+    // Función para encontrar la mejor respuesta
+    function findBestAnswer(question, lang) {
+      const kb = knowledgeBase[lang] || knowledgeBase.es;
+      const lowerQuestion = question.toLowerCase();
+      
+      // Buscar coincidencias exactas primero
+      for (let key in kb) {
+        if (lowerQuestion.includes(key)) {
+          return kb[key];
+        }
+      }
+      
+      // Si no encuentra, devolver respuesta por defecto
+      return kb.default || "Eso lo pienso... ¡mañana! 🤔💤";
+    }
+
+    // Animación del cerdito al hablar
+    function pigSpeak() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'none';
+      setTimeout(() => {
+        pig.style.animation = 'speak 0.5s ease';
+      }, 10);
+    }
+
+    // Animación del cerdito al pensar
+    function pigThink() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'think 1s ease-in-out infinite';
+    }
+
+    function pigStopThinking() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'breathe 3s ease-in-out infinite';
+    }
+
+    // Enviar mensaje
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const question = input.value.trim();
+      
+      if (!question) return;
+      
+      // Mostrar mensaje del usuario
+      addMessage(question, 'user');
+      input.value = '';
+      
+      // Mostrar "pensando..."
+      showThinking();
+      
+      // Simular tiempo de respuesta (como si estuviera pensando)
+      setTimeout(() => {
+        hideThinking();
+        
+        // Detectar idioma
+        const lang = detectLanguage(question);
+        
+        // Encontrar respuesta
+        const answer = findBestAnswer(question, lang);
+        
+        // Mostrar respuesta del bot
+        addMessage(answer, 'bot');
+        
+        // Animar al cerdito
+        pigSpeak();
+      }, 1500);
+    }
+
+    // Añadir mensaje al chat
+    function addMessage(text, sender) {
+      const chatBox = document.getElementById('chatBox');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}`;
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Mostrar "pensando..."
+    function showThinking() {
+      const chatBox = document.getElementById('chatBox');
+      const thinkingDiv = document.createElement('div');
+      thinkingDiv.className = 'message bot thinking';
+      thinkingDiv.id = 'thinkingIndicator';
+      thinkingDiv.innerHTML = `
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span style="margin-left: 8px;">Pensando...</span>
+      `;
+      chatBox.appendChild(thinkingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      
+      // Animar al cerdito
+      pigThink();
+    }
+
+    // Ocultar "pensando..."
+    function hideThinking() {
+      const thinkingDiv = document.getElementById('thinkingIndicator');
+      if (thinkingDiv) {
+        thinkingDiv.remove();
+      }
+      
+      // Detener animación de pensar
+      pigStopThinking();
+    }
+
+    // Enviar con Enter
+    document.getElementById('userInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Efecto de hover en el cerdito
+    document.getElementById('pig').addEventListener('click', function() {
+      addMessage("🐷 ¡Hola! Soy Tomorrow, el cerdito procrastinador.\n\nPregúntame lo que quieras... o no. 😌", 'bot');
+    });
   </script>
 </body>
+
 </html>
