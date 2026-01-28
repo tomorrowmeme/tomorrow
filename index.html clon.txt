@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrow (TMR) - El amigo de los memes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      padding: 30px;
+      text-align: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Chatbot */
+    .chatbot {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pig-container {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pig-img {
+      width: 180px;
+      height: 180px;
+      animation: breathe 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .pig-img:hover {
+      transform: scale(1.05);
+    }
+
+    .pig-img:active {
+      transform: scale(0.95);
+    }
+
+    /* Animaciones */
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes speak {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes think {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Chat interface */
+    .chat-box {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 20px;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 80%;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.bot {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user {
+      background: #e9ecef;
+      color: #333;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 15px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .input-area input:focus {
+      border-color: #667eea;
+    }
+
+    .input-area button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .input-area button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .input-area button:active {
+      transform: translateY(0);
+    }
+
+    /* Loading indicator */
+    .thinking {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      color: #667eea;
+      font-style: italic;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #667eea;
+      border-radius: 50%;
+      animation: bounce 1.4s ease-in-out infinite both;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .pig-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .chat-box {
+        min-height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🐷 Tomorrow (TMR)</h1>
+      <p>El amigo de los memes</p>
+    </div>
+
+    <div class="chatbot">
+      <div class="pig-container">
+        <img 
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTAwIiByeD0iNzUiIHJ5PSI3MCIgZmlsbD0iI2ZmYjZjMSIgc3Ryb2tlPSIjZmY2OWI0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZWxsaXBzZSBjeD0iNzAiIGN5PSI4MCIgcj0iMTUiIGZpbGw9IiNmZmYiLz4KICA8ZWxsaXBzZSBjeD0iMTMwIiBjeT0iODAiIHI9IjE1IiBmaWxsPSIjZmZmIi8+CiAgPGNpcmNsZSBjeD0iNjUiIGN5PSI3NSIgcj0iNSIgZmlsbD0iIzMzMyIvPgogIDxjaXJjbGUgY3g9IjEzNSIgY3k9Ijc1IiByPSI1IiBmaWxsPSIjMzMzIi8+CiAgPHBhdGggZD0iTTEwMCwxMjAgQzg1LDEzNSAxMTUsMTM1IDEwMCwxMjAgWiIgZmlsbD0iI2ZmOTljMCIvPgogIDxwYXRoIGQ9Ik04NSwxMzUgQzg1LDE0MCA5MCwxNDUgOTUsMTQwIEMxMDAsMTQ1IDEwNSwxNDAgMTA1LDEzNSBaIiBmaWxsPSIjZmY2OWI0Ii8+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSI4MCIgcj0iMiIgZmlsbD0iIzMzMyIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjgwIiByPSIyIiBmaWxsPSIjMzMzIi8+CiAgPHBhdGggZD0iTTEwMCwxNTAgQzkwLDE2MCAxMTAsMTYwIDEwMCwxNTAgWiIgZmlsbD0iI2ZmNjliNCIvPgogIDxwYXRoIGQ9Ik00MCwxMDAgQzMwLDkwIDMwLDExMCA0MCwxMDAgWiIgZmlsbD0iI2ZmYjZjMSIgc3Ryb2tlPSIjZmY2OWI0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTYwLDEwMCBDMTcwLDkwIDE3MCwxMTAgMTYwLDEwMCBaIiBmaWxsPSIjZmZiNmMxIiBzdHJva2U9IiNmZjY5YjQiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNmZjY5YjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5PUEU8L3RleHQ+Cjwvc3ZnPg=="
+          class="pig-img" 
+          id="pig" 
+          alt="Cerdito Tomorrow"
+        />
+      </div>
+
+      <div class="chat-box" id="chatBox">
+        <div class="message bot">
+          ¡Hola! 👋 Soy Tomorrow, el cerdito de las memecoins.
+          <br><br>
+          Pregúntame lo que quieras sobre el proyecto... o no.
+          <br><br>
+          <em>Hoy no. Siempre mañana. 💤</em>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Base de conocimiento del whitepaper (respuestas predefinidas)
+    const knowledgeBase = {
+      es: {
+        "qué es tomorrow": "Tomorrow (TMR) es una memecoin social construida sobre Solana, enfocada en comunidad, memes y entretenimiento. No es un producto financiero tradicional, es humor, cultura digital y comunidad. 🐷",
+        "qué es tmr": "TMR es el símbolo de Tomorrow, una memecoin que representa la frase universal: 'Mañana lo hago'. Es el amigo de los memes: el que siempre llega tarde, el que compra mañana, el que se ríe cuando ya es tarde. 😌",
+        "supply": "El supply total de TMR es de 1.000.000.000 tokens. Es fijo y no se crearán tokens adicionales. 📊",
+        "tokenomics": "La distribución es: 40% Preventa, 35% Liquidez, 25% Equipo + Marketing. El equipo usa su parte para memes, publicidad, comunidad y gastos operativos. 💰",
+        "liquidez": "La liquidez se creará en un DEX de Solana después de la preventa. Será bloqueada para aportar estabilidad y transparencia. 🔒",
+        "impuestos": "Los impuestos (compra/venta) están por definir. Cualquier impuesto se comunicará antes del lanzamiento oficial. Tomorrow no promete '0% para siempre', promete decir la verdad. 🧾",
+        "preventa": "La preventa está por definir (fecha y precio). Será a través de una plataforma externa en Solana. El precio será inferior al inicial tras el lanzamiento. Sin countdowns, sin gritos. 📅",
+        "roadmap": "FASE 0 ✅ HECHO - El token ya existe. FASE 1 🟡 EN PROCESO - Web, comunidad, memes. FASE 2 ⏳ MAÑANA - Preventa. FASE 3 🌅 MAÑANA - Liquidez + Lanzamiento. FASE 4 ♾️ SIEMPRE MAÑANA - Crecimiento orgánico. 🗺️",
+        "estado": "✅ Token creado en Solana | ❌ Liquidez: 0 | ❌ Precio: sin definir | 🟡 Comunidad: abierta y creciendo. El token existe técnicamente, pero no hay mercado todavía. 📊",
+        "chatbot": "¡Hola! Soy el chatbot de Tomorrow. Estoy aquí para responder preguntas con humor y tono meme. No soy asistente financiero ni herramienta de inversión. Solo un cerdito que procrastina. 🐷",
+        "filosofía": "Tomorrow se basa en tres principios: 🤝 Ser el amigo de los memes, 😌 Reducir la presión y el FOMO, 🕰 Aceptar que el 'mañana' puede llegar tarde... o no llegar. En un entorno que invita a correr, Tomorrow invita a esperar y reír. 🐷💤",
+        "auditoría": "El contrato SPL será auditado antes del lanzamiento oficial. La auditoría se centrará en la seguridad del contrato. Este whitepaper no es una auditoría técnica, es una explicación transparente. 🔍",
+        "fomopromo": "Mañana lo hago. Mañana lo compro. Mañana lo vendo. Mañana lo pienso. Mañana... 😴",
+        "hoy no": "Hoy no. Siempre mañana. 🐷💤",
+        "default": "Eso lo pienso... ¡mañana! 🤔💤\n\nPero si quieres, puedes preguntarme sobre: qué es Tomorrow, supply, tokenomics, liquidez, preventa, roadmap, estado actual..."
+      },
+      en: {
+        "what is tomorrow": "Tomorrow (TMR) is a memecoin social built on Solana, focused on community, memes and entertainment. It's not a traditional financial product, it's humor, digital culture and community. 🐷",
+        "what is tmr": "TMR is the symbol of Tomorrow, a memecoin that represents the universal phrase: 'I'll do it tomorrow'. It's the friend of memes: the one who's always late, the one who buys tomorrow, the one who laughs when it's too late. 😌",
+        "supply": "The total supply of TMR is 1,000,000,000 tokens. It's fixed and no additional tokens will be created. 📊",
+        "tokenomics": "Distribution: 40% Presale, 35% Liquidity, 25% Team + Marketing. The team uses their part for memes, advertising, community and operational expenses. 💰",
+        "liquidity": "Liquidity will be created on a Solana DEX after the presale. It will be locked to provide stability and transparency. 🔒",
+        "taxes": "Taxes (buy/sell) are to be defined. Any tax will be communicated before the official launch. Tomorrow doesn't promise '0% forever', it promises to tell the truth. 🧾",
+        "presale": "The presale is to be defined (date and price). It will be through an external platform on Solana. The price will be lower than the initial price after launch. No countdowns, no shouting. 📅",
+        "roadmap": "PHASE 0 ✅ DONE - Token already exists. PHASE 1 🟡 IN PROGRESS - Web, community, memes. PHASE 2 ⏳ TOMORROW - Presale. PHASE 3 🌅 TOMORROW - Liquidity + Launch. PHASE 4 ♾️ ALWAYS TOMORROW - Organic growth. 🗺️",
+        "status": "✅ Token created on Solana | ❌ Liquidity: 0 | ❌ Price: undefined | 🟡 Community: open and growing. The token exists technically, but there's no market yet. 📊",
+        "chatbot": "Hi! I'm Tomorrow's chatbot. I'm here to answer questions with humor and meme tone. I'm not a financial assistant or investment tool. Just a pig that procrastinates. 🐷",
+        "philosophy": "Tomorrow is based on three principles: 🤝 Be the friend of memes, 😌 Reduce pressure and FOMO, 🕰 Accept that 'tomorrow' may be late... or not come at all. In an environment that invites running, Tomorrow invites waiting and laughing. 🐷💤",
+        "audit": "The SPL contract will be audited before the official launch. The audit will focus on contract security. This whitepaper is not a technical audit, it's a transparent explanation. 🔍",
+        "fomopromo": "I'll do it tomorrow. I'll buy tomorrow. I'll sell tomorrow. I'll think about it tomorrow. Tomorrow... 😴",
+        "today no": "Today no. Always tomorrow. 🐷💤",
+        "default": "I'll think about that... tomorrow! 🤔💤\n\nBut if you want, you can ask me about: what is Tomorrow, supply, tokenomics, liquidity, presale, roadmap, current status..."
+      },
+      fr: {
+        "qu'est ce que tomorrow": "Tomorrow (TMR) est une memecoin sociale construite sur Solana, axée sur la communauté, les memes et le divertissement. Ce n'est pas un produit financier traditionnel, c'est de l'humour, de la culture numérique et de la communauté. 🐷",
+        "qu'est ce que tmr": "TMR est le symbole de Tomorrow, une memecoin qui représente la phrase universelle : 'Je le ferai demain'. C'est l'ami des memes : celui qui est toujours en retard, celui qui achète demain, celui qui rit quand il est trop tard. 😌",
+        "supply": "L'offre totale de TMR est de 1 000 000 000 de tokens. Elle est fixe et aucun token supplémentaire ne sera créé. 📊",
+        "tokenomics": "Répartition : 40% Prévente, 35% Liquidité, 25% Équipe + Marketing. L'équipe utilise sa part pour les memes, la publicité, la communauté et les dépenses opérationnelles. 💰",
+        "liquidité": "La liquidité sera créée sur un DEX Solana après la prévente. Elle sera bloquée pour apporter stabilité et transparence. 🔒",
+        "impôts": "Les taxes (achat/vente) sont à définir. Toute taxe sera communiquée avant le lancement officiel. Tomorrow ne promet pas '0% pour toujours', il promet de dire la vérité. 🧾",
+        "prévente": "La prévente est à définir (date et prix). Elle se fera via une plateforme externe sur Solana. Le prix sera inférieur au prix initial après le lancement. Pas de compte à rebours, pas de cris. 📅",
+        "feuille de route": "PHASE 0 ✅ FAIT - Le token existe déjà. PHASE 1 🟡 EN COURS - Web, communauté, memes. PHASE 2 ⏳ DEMAIN - Prévente. PHASE 3 🌅 DEMAIN - Liquidité + Lancement. PHASE 4 ♾️ TOUJOURS DEMAIN - Croissance organique. 🗺️",
+        "statut": "✅ Token créé sur Solana | ❌ Liquidité : 0 | ❌ Prix : non défini | 🟡 Communauté : ouverte et en croissance. Le token existe techniquement, mais il n'y a pas encore de marché. 📊",
+        "chatbot": "Salut ! Je suis le chatbot de Tomorrow. Je suis là pour répondre aux questions avec humour et ton meme. Je ne suis pas un assistant financier ni un outil d'investissement. Juste un cochon qui procrastine. 🐷",
+        "philosophie": "Tomorrow repose sur trois principes : 🤝 Être l'ami des memes, 😌 Réduire la pression et le FOMO, 🕰 Accepter que 'demain' puisse être en retard... ou ne jamais arriver. Dans un environnement qui invite à courir, Tomorrow invite à attendre et à rire. 🐷💤",
+        "audit": "Le contrat SPL sera audité avant le lancement officiel. L'audit se concentrera sur la sécurité du contrat. Ce whitepaper n'est pas un audit technique, c'est une explication transparente. 🔍",
+        "fomopromo": "Je le ferai demain. J'achèterai demain. Je vendrai demain. J'y réfléchirai demain. Demain... 😴",
+        "aujourd'hui non": "Aujourd'hui non. Toujours demain. 🐷💤",
+        "default": "J'y réfléchirai... demain ! 🤔💤\n\nMais si tu veux, tu peux me demander : qu'est-ce que Tomorrow, supply, tokenomics, liquidité, prévente, feuille de route, statut actuel..."
+      },
+      it: {
+        "cos'è tomorrow": "Tomorrow (TMR) è una memecoin sociale costruita su Solana, focalizzata su comunità, meme e intrattenimento. Non è un prodotto finanziario tradizionale, è umorismo, cultura digitale e comunità. 🐷",
+        "cos'è tmr": "TMR è il simbolo di Tomorrow, una memecoin che rappresenta la frase universale: 'Lo faccio domani'. È l'amico dei meme: quello che arriva sempre in ritardo, quello che compra domani, quello che ride quando è troppo tardi. 😌",
+        "supply": "La supply totale di TMR è di 1.000.000.000 token. È fissa e non saranno creati token aggiuntivi. 📊",
+        "default": "Ci penso... domani! 🤔💤"
+      }
+    };
+
+    // Detección simple de idioma (basada en palabras clave)
+    function detectLanguage(text) {
+      const lower = text.toLowerCase();
+      
+      // Español
+      const spanishWords = ['qué', 'es', 'supply', 'liquidez', 'preventa', 'roadmap', 'estado', 'hoy no', 'siempre mañana', 'mañana', 'token', 'memecoin'];
+      // Inglés
+      const englishWords = ['what', 'is', 'supply', 'liquidity', 'presale', 'roadmap', 'status', 'today no', 'always tomorrow', 'tomorrow', 'token', 'memecoin'];
+      // Francés
+      const frenchWords = ['qu\'est', 'quoi', 'supply', 'liquidité', 'prévente', 'feuille de route', 'statut', 'aujourd\'hui non', 'toujours demain', 'demain', 'token', 'memecoin'];
+      // Italiano
+      const italianWords = ['cos\'è', 'che', 'supply', 'liquidità', 'prevendita', 'roadmap', 'stato', 'oggi no', 'sempre domani', 'domani', 'token', 'memecoin'];
+      
+      let esCount = 0, enCount = 0, frCount = 0, itCount = 0;
+      
+      spanishWords.forEach(word => {
+        if (lower.includes(word)) esCount++;
+      });
+      
+      englishWords.forEach(word => {
+        if (lower.includes(word)) enCount++;
+      });
+      
+      frenchWords.forEach(word => {
+        if (lower.includes(word)) frCount++;
+      });
+      
+      italianWords.forEach(word => {
+        if (lower.includes(word)) itCount++;
+      });
+      
+      // Determinar el idioma con más coincidencias
+      const max = Math.max(esCount, enCount, frCount, itCount);
+      
+      if (max === 0) return 'es'; // Por defecto español
+      if (esCount === max) return 'es';
+      if (enCount === max) return 'en';
+      if (frCount === max) return 'fr';
+      if (itCount === max) return 'it';
+      
+      return 'es';
+    }
+
+    // Función para encontrar la mejor respuesta
+    function findBestAnswer(question, lang) {
+      const kb = knowledgeBase[lang] || knowledgeBase.es;
+      const lowerQuestion = question.toLowerCase();
+      
+      // Buscar coincidencias exactas primero
+      for (let key in kb) {
+        if (lowerQuestion.includes(key)) {
+          return kb[key];
+        }
+      }
+      
+      // Si no encuentra, devolver respuesta por defecto
+      return kb.default || "Eso lo pienso... ¡mañana! 🤔💤";
+    }
+
+    // Animación del cerdito al hablar
+    function pigSpeak() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'none';
+      setTimeout(() => {
+        pig.style.animation = 'speak 0.5s ease';
+      }, 10);
+    }
+
+    // Animación del cerdito al pensar
+    function pigThink() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'think 1s ease-in-out infinite';
+    }
+
+    function pigStopThinking() {
+      const pig = document.getElementById('pig');
+      pig.style.animation = 'breathe 3s ease-in-out infinite';
+    }
+
+    // Enviar mensaje
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const question = input.value.trim();
+      
+      if (!question) return;
+      
+      // Mostrar mensaje del usuario
+      addMessage(question, 'user');
+      input.value = '';
+      
+      // Mostrar "pensando..."
+      showThinking();
+      
+      // Simular tiempo de respuesta (como si estuviera pensando)
+      setTimeout(() => {
+        hideThinking();
+        
+        // Detectar idioma
+        const lang = detectLanguage(question);
+        
+        // Encontrar respuesta
+        const answer = findBestAnswer(question, lang);
+        
+        // Mostrar respuesta del bot
+        addMessage(answer, 'bot');
+        
+        // Animar al cerdito
+        pigSpeak();
+      }, 1500);
+    }
+
+    // Añadir mensaje al chat
+    function addMessage(text, sender) {
+      const chatBox = document.getElementById('chatBox');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}`;
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Mostrar "pensando..."
+    function showThinking() {
+      const chatBox = document.getElementById('chatBox');
+      const thinkingDiv = document.createElement('div');
+      thinkingDiv.className = 'message bot thinking';
+      thinkingDiv.id = 'thinkingIndicator';
+      thinkingDiv.innerHTML = `
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span style="margin-left: 8px;">Pensando...</span>
+      `;
+      chatBox.appendChild(thinkingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      
+      // Animar al cerdito
+      pigThink();
+    }
+
+    // Ocultar "pensando..."
+    function hideThinking() {
+      const thinkingDiv = document.getElementById('thinkingIndicator');
+      if (thinkingDiv) {
+        thinkingDiv.remove();
+      }
+      
+      // Detener animación de pensar
+      pigStopThinking();
+    }
+
+    // Enviar con Enter
+    document.getElementById('userInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Efecto de hover en el cerdito
+    document.getElementById('pig').addEventListener('click', function() {
+      addMessage("🐷 ¡Hola! Soy Tomorrow, el cerdito procrastinador.\n\nPregúntame lo que quieras... o no. 😌", 'bot');
+    });
+  </script>
+</body>
+</html>
